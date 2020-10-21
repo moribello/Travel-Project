@@ -1,6 +1,6 @@
 //import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Krona+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Advent+Pro+600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Advent+Pro&display=swap');
 
 //color variables
 $minion-yellow: #fde74cff;
@@ -38,7 +38,7 @@ section {
     grid-template-columns: 45% 1fr;
     grid-template-rows: 60px 60px 60px 1fr 60px;
     grid-gap: 5px;
-    grid-template-areas: 
+    grid-template-areas:
         "hd hd"
         "intro intro"
         "ul ud"
