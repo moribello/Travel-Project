@@ -1,0 +1,71 @@
+%textLabel {
+    display: flex;
+    flex-direction: row;
+    text-align: right;
+    font-weight: bold;
+}
+%dataField{
+    display:flex;
+    flex-direction: row;
+    text-align: left;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 2;
+}
+
+section {
+    max-width: 800px;
+    margin: 50px auto;
+    h1 {
+        font-size: 1.2em;
+    }
+}
+
+#results{
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    grid-template-rows: 30px 30px 30px;
+    grid-gap: 5px;
+    grid-template-areas:
+        "al agree"
+        "cl conf"
+        "il irony";
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.textLabel{
+
+}
+#alabel{
+    @extend %textLabel;
+    grid-area: al;
+}
+
+#clabel{
+    @extend %textLabel;
+    grid-area: cl;
+}
+#ilabel{
+    @extend %textLabel;
+    grid-area: il;
+}
+#agree{
+    @extend %dataField;
+    grid-area: agree;
+}
+#conf{
+    @extend %dataField;
+    grid-area: conf;
+}
+#irony{
+    @extend %dataField;
+    grid-area: irony;
+}
