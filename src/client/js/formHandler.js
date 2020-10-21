@@ -13,7 +13,7 @@ function handleSubmit(event) {
     } else {
 
 //new section to have server request API data and return it
-fetch('http://localhost:8080/getAPIdata', {
+fetch('http://localhost:8084/getAPIdata', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {

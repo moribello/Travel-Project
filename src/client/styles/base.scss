@@ -1,19 +1,24 @@
-%textLabel {
-    display: flex;
-    flex-direction: row;
-    text-align: right;
-    font-weight: bold;
-}
-%dataField{
-    display:flex;
-    flex-direction: row;
-    text-align: left;
-}
+//import Google fonts
+@import url('https://fonts.googleapis.com/css?family=Krona+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Advent+Pro+600&display=swap');
+
+//color variables
+$minion-yellow: #fde74cff;
+$space-cadet: #2d3142ff;
+$light-cyan: #ddfdfeff;
+$shadow-blue: #748cabff;
+$text-color: #0e131fff;
+
+//font variables
+$title-text: 'Krono One', sans-serif;
+$body-text: 'Advent Pro 600', sans-serif;
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    color: $text-color;
+    font: $body-text;
 }
 
 main {
@@ -22,50 +27,49 @@ main {
 
 section {
     max-width: 800px;
-    margin: 50px auto;
+    margin: 20px auto;
     h1 {
         font-size: 1.2em;
     }
 }
 
-#results{
+#mainGrid {
     display: grid;
-    grid-template-columns: 35% 1fr;
-    grid-template-rows: 30px 30px 30px;
+    grid-template-columns: 45% 1fr;
+    grid-template-rows: 60px 60px 60px 1fr 60px;
     grid-gap: 5px;
-    grid-template-areas:
-        "al agree"
-        "cl conf"
-        "il irony";
-    margin-left: 10px;
-    margin-top: 10px;
+    grid-template-areas: 
+        "hd hd"
+        "intro intro"
+        "ul ud"
+        "ph td"
+        "ft ft"
+}
+
+#title{
+    grid-area: hd;
+    display: flex;
+    flex-direction: row;
+    font: $title-text;
+}
+
+#intro {
+    grid-area: intro;
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+.displayBox {
+    background-color: $light-cyan;
+}
+
+.userTextBox {
+    background-color: #dddddd;
 }
 
 .textLabel{
 
-}
-#alabel{
-    @extend %textLabel;
-    grid-area: al;
-}
-
-#clabel{
-    @extend %textLabel;
-    grid-area: cl;
-}
-#ilabel{
-    @extend %textLabel;
-    grid-area: il;
-}
-#agree{
-    @extend %dataField;
-    grid-area: agree;
-}
-#conf{
-    @extend %dataField;
-    grid-area: conf;
-}
-#irony{
-    @extend %dataField;
-    grid-area: irony;
 }
