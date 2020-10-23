@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Krona+One">
         <meta charset="utf-8">
         <title>Travel App</title>
         <link rel="stylesheet" href="/styles/resets.scss">
@@ -8,7 +9,7 @@
         <link rel="stylesheet" href="/styles/header.scss">
         <link rel="stylesheet" href="/styles/form.scss">
         <link rel="stylesheet" href="/styles/footer.scss">
-    </head>
+</head>
 
     <body>
 
@@ -22,9 +23,41 @@
                 </form>
             <section>
 -->
-    <div id="title">Travel Planning App</div>
+    <div id="title" style="font-family:'Krona One'" >
+        <h1>Travel Planning App</h1>
+    </div>
+
+    <div id="intro">Maecenas sed nulla eros. Donec arcu quam, eleifend in porttitor sed, venenatis id magna. Suspendisse et malesuada turpis. Nunc ut malesuada nisi. Mauris ut vestibulum mi. Quisque tempor, quam sit amet laoreet fringilla, ligula tortor mollis arcu, quis porttitor lectus lectus sed nunc. Donec sed arcu id ex rhoncus aliquam sed in arcu. Duis pulvinar neque sit amet imperdiet placerat.</div>
+
+    <div id="userLocation">
+    <form onSubmit="return Client.handleSubmit(event)">
+        <h2>Location:</h2>
+        <input id="userTextLoc" class="userTextBox" type="text" name="Location" placeholder="Please enter your destination city">
+    </div>
+    <div id="userDate">
+        <h2>Date:</h2>
+        <input id="userTextDate" class="userTextBox" type="text" name="Date" placeholder="Please enter the date you intend to arrive">
+    </div>
+    </form>
+
+    <!-- <div id="photo"><img src="IMG_8936.jpg" alt="location photo"></div>
+    <div id="dispMain">
+        <div>
+            <h2>Location:</h2>
+            <div id="dispLoc"></div>
+        </div>
+        <div>
+            <h2>Date:</h2>
+            <div id="dispDate"></div>
+        </div>
+        <div>
+            <h2>Location:</h2>
+            <div id="dispWeath"></div>
+        </div>
+    </div> -->
 
 </div> <!-- close main grid div -->
+
         <script>
          if ('serviceWorker' in navigator) {
              window.addEventListener('load', () => {
