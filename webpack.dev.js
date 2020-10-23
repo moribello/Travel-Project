@@ -1,12 +1,15 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
     mode: 'development',
     devtool: 'source-map',
+    devServer: {
+        contentBase: './dist',
+    },
     stats: 'verbose',
     module: {
         rules: [
@@ -24,7 +27,10 @@ module.exports = {
     plugins: [
         new HtmlWebPackPlugin({
             template: "./src/client/views/index.html",
-            filename: "./index.html",
+            //point to explicit working directory
+            // template: "/Users/mo/Documents/Udacity/Front_End_Developer/Travel-Project/src/client/views/index.html",
+            filename: ".src/client/views/index.html",
+            // filename: "./index.html",
         }),
         new CleanWebpackPlugin({
             // Simulate the removal of files

@@ -1,29 +1,38 @@
 //import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Krona+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Advent+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Krona+One|Advent+Pro:600');
+
+//@import url('https://fonts.googleapis.com/css?family=Advent+Pro&display=swap');
 
 //color variables
-$minion-yellow: #fde74cff;
-$space-cadet: #2d3142ff;
-$light-cyan: #ddfdfeff;
-$shadow-blue: #748cabff;
-$text-color: #0e131fff;
+$mainBlue: #748CAB;	// Main Primary color */
+$lightestBlue: #D5DEEA;
+$blueGray: #A5B7CD;
+$darkerBlue: #4D6B90;
+$titleBlue: #2D4C73;
 
 //font variables
 $title-text: 'Krono One', sans-serif;
-$body-text: 'Advent Pro 600', sans-serif;
+$body-text: 'Advent Pro', sans-serif;
+
+%dispBox {
+    background-color: $blueGray;
+    padding-left: 10px;
+}
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: $text-color;
     font: $body-text;
 }
 
-main {
-    flex: 2;
+form{
+    border: 0px none;
 }
+
+// main {
+//     flex: 2;
+// }
 
 section {
     max-width: 800px;
@@ -31,6 +40,9 @@ section {
     h1 {
         font-size: 1.2em;
     }
+}
+h1{
+    font-family: $lightestBlue;
 }
 
 #mainGrid {
@@ -50,21 +62,59 @@ section {
     grid-area: hd;
     display: flex;
     flex-direction: row;
-    font: $title-text;
+    padding-left: 20px;
+    align-items: center;
+    font-weight: bold;
+    background-color: $titleBlue;
+    color: $lightestBlue;
 }
 
 #intro {
+    @extend %dispBox;
     grid-area: intro;
     display: flex;
     flex-direction: row;
+    max-width: 90%;
+    margin: 0px 20px;
+    padding: 5px;
+    background-color: $blueGray;
 }
 
-
-
-
-.displayBox {
-    background-color: $light-cyan;
+#userLocation {
+    @extend %dispBox;
+    grid-area: ul;
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    margin: 0 20;
+    border: 1px solid red;
 }
+
+#photo{
+    @extend %dispBox;
+    grid-area: ph;
+    display: flex;
+    flex-direction: column;
+}
+
+#dispMain{
+    @extend %dispBox;
+    grid-area: td;
+    display: flex;
+    flex-direction: column;
+}
+
+#userDate {
+    grid-area: ud;
+    display: flex;
+    flex-direction: column;
+    max-width: 45%;
+    margin: 0 20;
+}
+
+// .displayBox {
+//     background-color: $blueGray;
+// }
 
 .userTextBox {
     background-color: #dddddd;
