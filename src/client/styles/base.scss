@@ -26,43 +26,19 @@ body {
     font: $body-text;
 }
 
-form{
-    border: 0px none;
-}
-
 // main {
 //     flex: 2;
 // }
 
-section {
-    max-width: 800px;
-    margin: 20px auto;
-    h1 {
-        font-size: 1.2em;
-    }
-}
 h1{
     font-family: $lightestBlue;
 }
 
-#mainGrid {
-    display: grid;
-    grid-template-columns: 45% 1fr;
-    grid-template-rows: 60px 60px 60px 1fr 60px;
-    grid-gap: 5px;
-    grid-template-areas:
-        "hd hd"
-        "intro intro"
-        "ul ud"
-        "ph td"
-        "ft ft"
-}
-
 #title{
-    grid-area: hd;
     display: flex;
     flex-direction: row;
-    padding-left: 20px;
+    margin: 10px 0px;
+    padding: 20px;
     align-items: center;
     font-weight: bold;
     background-color: $titleBlue;
@@ -71,7 +47,6 @@ h1{
 
 #intro {
     @extend %dispBox;
-    grid-area: intro;
     display: flex;
     flex-direction: row;
     max-width: 90%;
@@ -80,36 +55,38 @@ h1{
     background-color: $blueGray;
 }
 
-#userLocation {
+#userInput{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 5px auto;
+}
+
+#userLoc {
     @extend %dispBox;
-    grid-area: ul;
     display: flex;
     flex-direction: column;
-    max-width: 45%;
-    margin: 0 20;
-    border: 1px solid red;
+    width: 45%;
+    margin: 0 10;
+}
+#userDate {
+    @extend %dispBox;
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    margin: 0 10;
 }
 
 #photo{
     @extend %dispBox;
-    grid-area: ph;
     display: flex;
     flex-direction: column;
 }
 
 #dispMain{
     @extend %dispBox;
-    grid-area: td;
     display: flex;
     flex-direction: column;
-}
-
-#userDate {
-    grid-area: ud;
-    display: flex;
-    flex-direction: column;
-    max-width: 45%;
-    margin: 0 20;
 }
 
 // .displayBox {
