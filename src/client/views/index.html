@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Krona+One">
         <meta charset="utf-8">
         <title>Travel App</title>
         <link rel="stylesheet" href="/styles/resets.scss">
@@ -25,35 +24,40 @@
         <h1>Travel Planning App</h1>
     </div>
 
-    <div id="intro">Maecenas sed nulla eros. Donec arcu quam, eleifend in porttitor sed, venenatis id magna. Suspendisse et malesuada turpis. Nunc ut malesuada nisi. Mauris ut vestibulum mi. Quisque tempor, quam sit amet laoreet fringilla, ligula tortor mollis arcu, quis porttitor lectus lectus sed nunc. Donec sed arcu id ex rhoncus aliquam sed in arcu. Duis pulvinar neque sit amet imperdiet placerat.</div>
+    <div id="intro">Welcome to the Travel Planning app! This app is designed to give you information on your upcoming travel including forcast weather and a view of the location you'll be traveling to. Please enter the destination city and date you intend to arrive in the fields below.</div>
 
     <div id="userInput">
-        <!-- <form onSubmit="return Client.handleSubmit(event)"> -->
-        <div id="userLoc">
-            <h2>Location:</h2>
-            <input id="userLocText" class="userTextBox" type="text" name="Location" placeholder="Please enter your destination city">
-        </div>
-        <div id="userDate">
-            <h2>Date:</h2>
-            <input id="userDateText" class="userTextBox" type="text" name="Date" placeholder="Please enter the date you intend to arrive">
-        </div>
-        <!-- </form> -->
+        <form onSubmit="return Client.handleSubmit(event)">
+        <div id="inputFields">
+            <div id="userLoc">
+                <h2>Location:</h2>
+                <input id="userLocText" class="userTextBox" type="text" name="Location" placeholder="Please enter your destination city">
+            </div>
+            <div id="userDate">
+                <h2>Date:</h2>
+                <input id="userDateText" class="userTextBox" type="text" name="Date" placeholder="Please enter the date you intend to arrive">
+            </div>
+        </div> <!-- end of inputFields div -->
+        <div id="submitButton">
+            <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+        </div> <!-- End of submitButton div -->
+        </form>
     </div> <!-- end of userInput div -->
 
     <div id="apiData">
         <div id="photo"><img src="IMG_8936.jpg" alt="location photo"></div>
         <div id="dispMain">
             <div>
-                <h2>Location:</h2>
+                <h1>Location:</h1>
                 <div id="dispLoc"></div>
             </div>
             <div>
-            <h2>Date:</h2>
-            <div id="dispDate"></div>
+                <h1>Date:</h1>
+                <div id="dispDate"></div>
             </div>
             <div>
-            <h2>Location:</h2>
-            <div id="dispWeath"></div>
+                <h1>Weather:</h1>
+                <div id="dispWeath"></div>
             </div>
         </div>
 </div> <!-- End of apiData div -->
