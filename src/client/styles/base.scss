@@ -1,7 +1,7 @@
 //import Google fonts
-@import url('https://fonts.googleapis.com/css?family=Krona+One|Advent+Pro:600');
+@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&display=swap');
 
-//@import url('https://fonts.googleapis.com/css?family=Advent+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Krona+One');
 
 //color variables
 $mainBlue: #748CAB;	// Main Primary color */
@@ -16,14 +16,16 @@ $body-text: 'Advent Pro', sans-serif;
 
 %dispBox {
     background-color: $blueGray;
-    padding-left: 10px;
+    margin: 0px 10px;
+    padding: 10px;
+    width: 45%;
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font: $body-text;
+    font-family: $body-text;
 }
 
 // main {
@@ -43,13 +45,14 @@ h1{
     font-weight: bold;
     background-color: $titleBlue;
     color: $lightestBlue;
+    font-family: $title-text;
 }
 
 #intro {
     @extend %dispBox;
     display: flex;
     flex-direction: row;
-    max-width: 90%;
+    width: 90%;
     margin: 0px 20px;
     padding: 5px;
     background-color: $blueGray;
@@ -66,17 +69,19 @@ h1{
     @extend %dispBox;
     display: flex;
     flex-direction: column;
-    width: 45%;
-    margin: 0 10;
 }
 #userDate {
     @extend %dispBox;
     display: flex;
     flex-direction: column;
-    width: 45%;
-    margin: 0 10;
 }
 
+#apiData {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 5px auto;
+}
 #photo{
     @extend %dispBox;
     display: flex;
