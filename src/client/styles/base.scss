@@ -104,6 +104,9 @@ h1{
     @extend %dispBox;
     display: flex;
     flex-direction: column;
+    h1 {
+        font-size: 1.5em;
+    }
 }
 
 .userTextBox {

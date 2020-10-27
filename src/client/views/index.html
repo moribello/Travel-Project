@@ -39,7 +39,7 @@
             </div>
         </div> <!-- end of inputFields div -->
         <div id="submitButton">
-            <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+            <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
         </div> <!-- End of submitButton div -->
         </form>
     </div> <!-- end of userInput div -->
@@ -54,6 +54,9 @@
             <div>
                 <h1>Date:</h1>
                 <div id="dispDate"></div>
+            </div>
+            <div>
+                <div id="dispCountdown"></div>
             </div>
             <div>
                 <h1>Weather:</h1>
