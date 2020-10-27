@@ -2,7 +2,11 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // retrieve text entered into the form field
-    let formText = document.getElementById('userText').value
+    let userLoc = document.getElementById('userLocText').value;
+    let userDate = document.getElementById('userDateText').value;
+
+    //test input text
+    alert(`You are going to ${userLoc} on ${userDate}.`)
 
     //validate input text
     Client.validateText(formText)
