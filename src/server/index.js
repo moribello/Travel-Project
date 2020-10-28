@@ -35,11 +35,11 @@ app.post('/getGeoName', async function (req, res) {
     geoname.username = process.env.geonames_username;
     let geonamesURL =
     `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${geoname.username}`
-    //
-    // let fullURL = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey.key}&of=json&txt=${formText}&model=general&lang=en`;
-    console.log(geonamesURL);
     let response = await fetch(geonamesURL);
     let data = await response.json();
+    latLong.lat = data.geoCoderResult.lat;
+    latLong.long = data.geoCoderResult.lng;
+    console.log(latLong);
 
     // projectData.model = data.model; //new
     // projectData.polarity = data.score_tag;
