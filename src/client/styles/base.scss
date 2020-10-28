@@ -9,6 +9,7 @@ $lightestBlue: #D5DEEA;
 $blueGray: #A5B7CD;
 $darkerBlue: #4D6B90;
 $titleBlue: #2D4C73;
+$light-gray: #DDDDDD;
 
 //font variables
 $title-text: 'Krono One', sans-serif;
@@ -85,7 +86,9 @@ h1{
     flex-direction: column;
 }
 #submitButton {
-    width: 100%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #apiData {
@@ -110,7 +113,14 @@ h1{
 }
 
 .userTextBox {
-    background-color: #dddddd;
+    background-color: $light-gray;
+}
+
+.displayBox {
+    display: flex;
+    flex-direction: row;
+    background-color: $lightestBlue;
+    padding: 5px 10px;
 }
 
 .textLabel{
