@@ -6,6 +6,7 @@ dotenv.config();
 
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
+let latLong = {};
 
 // Require express to run server and routes
 const express = require('express') //include Express installation
@@ -28,21 +29,24 @@ app.listen(8084, function () {
     console.log('Example app listening on port 8084!')
 })
 
-let apiKey = {};
-app.post('/getAPIdata', async function (req, res) {
-    let formText = req.body.text;
-    apiKey.key = process.env.API_KEY;
-    let fullURL = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey.key}&of=json&txt=${formText}&model=general&lang=en`;
-    console.log(fullURL);
-    let response = await fetch(fullURL);
+let geoname = {};
+app.post('/getGeoName', async function (req, res) {
+    let userLoc = req.body.text;
+    geoname.username = process.env.geonames_username;
+    let geonamesURL =
+    `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${geoname.username}`
+    //
+    // let fullURL = `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey.key}&of=json&txt=${formText}&model=general&lang=en`;
+    console.log(geonamesURL);
+    let response = await fetch(geonamesURL);
     let data = await response.json();
-    // console.log(data);
-    projectData.model = data.model; //new
-    projectData.polarity = data.score_tag;
-    projectData.confidence = data.confidence;
-    projectData.subjectivity = data.subjectivity;
-    projectData.agreement = data.agreement;
-    projectData.irony = data.irony;
-    res.send(projectData);
+
+    // projectData.model = data.model; //new
+    // projectData.polarity = data.score_tag;
+    // projectData.confidence = data.confidence;
+    // projectData.subjectivity = data.subjectivity;
+    // projectData.agreement = data.agreement;
+    // projectData.irony = data.irony;
+    // res.send(projectData);
     // console.log(projectData);
 });
