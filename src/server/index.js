@@ -29,24 +29,19 @@ app.listen(8084, function () {
     console.log('Example app listening on port 8084!')
 })
 
-let geoname = {};
+let apiKeys = {};
+
 app.post('/getGeoName', async function (req, res) {
     let userLoc = req.body.text;
-    geoname.username = process.env.geonames_username;
+    apiKeys.geoname = process.env.geonames_username; //get geonames username
+    apiKeys.weatherbit = process.env.weatherbit_key; // get weatherbit api key
     let geonamesURL =
-    `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${geoname.username}`
+    `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${apiKeys.geoname}` //create full URL for geonames query
     let response = await fetch(geonamesURL);
     let data = await response.json();
     latLong.lat = data.geoCoderResult.lat;
     latLong.long = data.geoCoderResult.lng;
     console.log(latLong);
-
-    // projectData.model = data.model; //new
-    // projectData.polarity = data.score_tag;
-    // projectData.confidence = data.confidence;
-    // projectData.subjectivity = data.subjectivity;
-    // projectData.agreement = data.agreement;
-    // projectData.irony = data.irony;
-    // res.send(projectData);
-    // console.log(projectData);
+    let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
+    console.log(weatherbitURL);
 });
