@@ -6,7 +6,9 @@ dotenv.config();
 
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
-let latLong = {};
+let latLong = {}; //JS object for lat / long data
+let weatherData = {} //JS object for weather data
+
 
 // Require express to run server and routes
 const express = require('express') //include Express installation
@@ -43,5 +45,15 @@ app.post('/getGeoName', async function (req, res) {
     latLong.long = data.geoCoderResult.lng;
     console.log(latLong);
     let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
-    console.log(weatherbitURL);
-});
+    getWeatherData(weatherbitURL);
+    });
+
+// Get weather data
+var getWeatherData = async function (weatherbitURL) {
+    let weatherResp = await fetch(weatherbitURL);
+    let weathDataTemp = await weatherResp.json();
+    console.log(weathDataTemp);
+    weatherData.temp = weathDataTemp.data.temp;
+    weatherData.feelsLike = weathDataTemp.data.app_temp;
+    console.log(weatherData);
+    }
