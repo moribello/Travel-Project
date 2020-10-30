@@ -2,7 +2,7 @@
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const http = require("https");
-// const countryCodes = require('./countryCodes.js');
+const getCountryName = require('./countryCodes.js');
 
 dotenv.config();
 
@@ -58,18 +58,19 @@ app.post('/getGeoName', async function (req, res) {
     if (latLong.state != ""){
         travLocation = latLong.state;
     } else {
-        travLocation = latLong.countryCode;
+        cCode = latLong.countryCode;
+        let travLocation = getCountryName(latLong.countryCode);
     };
-    console.log(travLocation);
+
 });
-// Get weather data
+// Get weather data function
 var getWeatherData = async function (weatherbitURL) {
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
     console.log(weathDataTemp);
     weatherData.temp = weathDataTemp.temp;
     weatherData.feelsLike = weathDataTemp.data.app_temp;
-    console.log(weatherData);
+    console.log(weatherData.data);
     }
 
 // Get image from pixabay_key
