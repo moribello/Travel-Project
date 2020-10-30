@@ -67,10 +67,10 @@ app.post('/getGeoName', async function (req, res) {
 var getWeatherData = async function (weatherbitURL) {
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    console.log(weathDataTemp);
-    weatherData.temp = weathDataTemp.temp;
-    weatherData.feelsLike = weathDataTemp.data.app_temp;
-    console.log(weatherData.data);
+    weatherData.temp = weathDataTemp.data[0].temp;
+    weatherData.feelsLike = weathDataTemp.data[0].app_temp;
+    weatherData.desc = weathDataTemp.data[0].weather.description;
+    console.log(weatherData);
     }
 
 // Get image from pixabay_key
