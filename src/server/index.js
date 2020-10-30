@@ -1,8 +1,12 @@
 //Enable environment variables using dotenv
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
-const http = require("https")
+const http = require("https");
+// const countryCodes = require('./countryCodes.js');
+
 dotenv.config();
+
+// import { isoCountries } from './countryCodes.js';
 
 // Setup empty JS object to act as endpoint for all routes
 let projectData = {};
@@ -37,23 +41,38 @@ app.post('/getGeoName', async function (req, res) {
     let userLoc = req.body.text;
     apiKeys.geoname = process.env.geonames_username; //get geonames username
     apiKeys.weatherbit = process.env.weatherbit_key; // get weatherbit api key
+    apiKeys.pixabay = process.env.pixabay_key; //get Pixabay key
     let geonamesURL =
     `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${apiKeys.geoname}` //create full URL for geonames query
     let response = await fetch(geonamesURL);
     let data = await response.json();
     latLong.lat = data.geoCoderResult.lat;
     latLong.long = data.geoCoderResult.lng;
+    latLong.countryCode = data.geoCoderResult.countryCode;
+    latLong.state = data.geoCoderResult.adminName1;
     console.log(latLong);
     let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
-    getWeatherData(weatherbitURL);
-    });
+    getWeatherData(weatherbitURL);//run function to get weather data based on lat and long
 
+    //get location from weather data
+    if (latLong.state != ""){
+        travLocation = latLong.state;
+    } else {
+        travLocation = latLong.countryCode;
+    };
+    console.log(travLocation);
+});
 // Get weather data
 var getWeatherData = async function (weatherbitURL) {
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
     console.log(weathDataTemp);
-    weatherData.temp = weathDataTemp.data.temp;
+    weatherData.temp = weathDataTemp.temp;
     weatherData.feelsLike = weathDataTemp.data.app_temp;
     console.log(weatherData);
     }
+
+// Get image from pixabay_key
+// var getPixabay = async function (travLocation) {
+//
+// }
