@@ -53,7 +53,7 @@ app.post('/getGeoName', async function (req, res) {
     console.log(latLong);
     let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
     getWeatherData(weatherbitURL);//run function to get weather data based on lat and long
-
+    getPixabay(userLoc);//run function to get pixabay data
     //get location from weather data
     if (latLong.state != ""){
         travLocation = latLong.state;
@@ -69,11 +69,15 @@ var getWeatherData = async function (weatherbitURL) {
     let weathDataTemp = await weatherResp.json();
     weatherData.temp = weathDataTemp.data[0].temp;
     weatherData.feelsLike = weathDataTemp.data[0].app_temp;
-    weatherData.desc = weathDataTemp.data[0].weather.description;
+    weatherData.desc = weathDataTemp.data[0].weather.description
     console.log(weatherData);
     }
 
 // Get image from pixabay_key
-// var getPixabay = async function (travLocation) {
-//
-// }
+var getPixabay = async function (travLocation) {
+    let pixabayURL = `https://pixabay.com/api/?key=${apiKeys.pixabay}&q=${travLocation}&image_type=photo`
+    console.log(pixabayURL);
+    let pixabayResp = await fetch(pixabayURL);
+    let pixabayTemp = await pixabayResp.json();
+    console.log(pixabayTemp.hits[0].webformatURL);
+}
