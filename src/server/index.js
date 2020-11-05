@@ -37,8 +37,16 @@ app.listen(8084, function () {
 
 let apiKeys = {};
 
+function cToF(tempC) {
+    let tempF = +((tempC * (9/5)) + 32).toFixed(2);
+    return tempF;
+}
+
+
 app.post('/getGeoName', async function (req, res) {
     let userLoc = req.body.text;
+    let countdown = req.body.days;
+    console.log(`countdown: ${countdown}`);
     apiKeys.geoname = process.env.geonames_username; //get geonames username
     apiKeys.weatherbit = process.env.weatherbit_key; // get weatherbit api key
     apiKeys.pixabay = process.env.pixabay_key; //get Pixabay key
@@ -52,18 +60,17 @@ app.post('/getGeoName', async function (req, res) {
     latLong.countryCode = data.geoCoderResult.countryCode;
     latLong.state = data.geoCoderResult.adminName1;
     let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
-    let weatherData = getWeatherData(weatherbitURL);//run function to get weather data based on lat and long
+    //run function to get weather data based on lat and long
+    if (countdown <= 14){
+        console.log("Less than 2 weeks to go!")
+        let weatherData = getWeatherData(weatherbitURL);
+    } else {
+        console.log("Searching for historical weather data");
+    }
     console.log(weatherData);
     getPixabay(userLoc);//run function to get pixabay data
     // res.send(weatherData);
 
-    //get location from weather data
-    // if (latLong.state != ""){
-    //     travLocation = latLong.state;
-    // } else {
-    //     cCode = latLong.countryCode;
-    //     let travLocation = getCountryName(latLong.countryCode);
-    // };
 
 });
 // Get weather data function
@@ -72,10 +79,11 @@ var getWeatherData = async function (weatherbitURL) {
     let weatherDataLoc = {}
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    tempC = weathDataTemp.data[0].temp;
-    feelsLike = weathDataTemp.data[0].app_temp;
-    desc = weathDataTemp.data[0].weather.description;
-    return [tempC, feelsLike, desc];
+    weatherDataLoc.tempC = weathDataTemp.data[0].temp;
+    weatherDataLoc.tempF = cToF(weathDataTemp.data[0].temp);
+    weatherDataLoc.feelsLike = cToF(weathDataTemp.data[0].app_temp);
+    weatherDataLoc.desc = weathDataTemp.data[0].weather.description;
+    console.log(weatherDataLoc);
 };
 
 // Get image from pixabay_key
