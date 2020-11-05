@@ -52,7 +52,8 @@ app.post('/getGeoName', async function (req, res) {
     latLong.countryCode = data.geoCoderResult.countryCode;
     latLong.state = data.geoCoderResult.adminName1;
     let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
-    getWeatherData(weatherbitURL);//run function to get weather data based on lat and long
+    let weatherData = getWeatherData(weatherbitURL);//run function to get weather data based on lat and long
+    console.log(weatherData);
     getPixabay(userLoc);//run function to get pixabay data
     // res.send(weatherData);
 
@@ -68,12 +69,14 @@ app.post('/getGeoName', async function (req, res) {
 // Get weather data function
 var getWeatherData = async function (weatherbitURL) {
     //you will need to create an array and return it, then write it to the javascript object.
+    let weatherDataLoc = {}
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    weatherData.temp = weathDataTemp.data[0].temp;
-    weatherData.feelsLike = weathDataTemp.data[0].app_temp;
-    weatherData.desc = weathDataTemp.data[0].weather.description
-    }
+    tempC = weathDataTemp.data[0].temp;
+    feelsLike = weathDataTemp.data[0].app_temp;
+    desc = weathDataTemp.data[0].weather.description;
+    return [tempC, feelsLike, desc];
+};
 
 // Get image from pixabay_key
 var getPixabay = async function (travLocation) {
