@@ -11,8 +11,8 @@ dotenv.config();
 // Setup empty JS object to act as endpoint for all routes
 // let projectData = {};
 let latLong = {}; //JS object for lat / long data
-let weatherData = {} //JS object for weather data
-
+var weatherData = {} //JS object for weather data
+let apiKeys = {}; //Empty JS object to hold all of the API keys
 
 // Require express to run server and routes
 const express = require('express') //include Express installation
@@ -35,7 +35,6 @@ app.listen(8084, function () {
     console.log('Example app listening on port 8084!')
 })
 
-let apiKeys = {};
 
 //function to convert from Celcius to Farenheit
 function cToF(tempC) {
@@ -43,12 +42,10 @@ function cToF(tempC) {
     return tempF;
 }
 
-
 app.post('/getGeoName', async function (req, res) {
     let userLoc = req.body.text;
     let countdown = req.body.days;
     let userDate = req.body.userDate;
-    console.log(`countdown: ${countdown} until ${userDate}`);
     apiKeys.geoname = process.env.geonames_username; //get geonames username
     apiKeys.weatherbit = process.env.weatherbit_key; // get weatherbit api key
     apiKeys.pixabay = process.env.pixabay_key; //get Pixabay key
@@ -65,10 +62,10 @@ app.post('/getGeoName', async function (req, res) {
     //run function to get weather data based on lat and long
     if (countdown <= 14){
         console.log("Less than 2 weeks to go!")
-        let weatherData = getWeatherData();
+        await getWeatherData();
     } else {
         console.log(`Searching for historical weather data for ${userDate}`);
-        let weatherData = getHistWeatherData(userDate);
+        await getHistWeatherData(userDate);
     }
     console.log(weatherData);
     //run function to get pixabay data
@@ -83,22 +80,28 @@ var getWeatherData = async function () {
     let weatherDataLoc = {}
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    weatherDataLoc.tempC = weathDataTemp.data[0].temp;
-    weatherDataLoc.tempF = cToF(weathDataTemp.data[0].temp);
-    weatherDataLoc.feelsLike = cToF(weathDataTemp.data[0].app_temp);
-    weatherDataLoc.desc = weathDataTemp.data[0].weather.description;
-    console.log(weatherDataLoc);
+    weatherData.tempC = weathDataTemp.data[0].temp;
+    weatherData.tempF = cToF(weathDataTemp.data[0].temp);
+    weatherData.feelsLike = cToF(weathDataTemp.data[0].app_temp);
+    weatherData.desc = weathDataTemp.data[0].weather.description;
 };
 
 var getHistWeatherData = async function (userDate) {
     let histWeatherLoc = {}; //local javascript object to hold data
-    const shortDate = userDate.substring(0,10);
-    console.log(`userDate: ${userDate}`);
-    console.log(`shortDate: ${shortDate}`);
-    const weatherURL = `https://api.weatherbit.io/v2.0/history/hourly?lat=${latLong.lat}&lon=${latLong.long}&start_date=${shortDate}&end_date=${shortDate}&tz=local&key=${apiKeys.weatherbit}`
-    console.log(weatherURL);
-    //fetch values
-
+    const month = userDate.substring(6,7);//month is kept as a string because we don't need to do anything to it
+    const date = parseInt(userDate.substring(9,10));//get int value for day of month
+    const datePlusOne = date + 1; //add one to the user date to get the end point
+    const shortDate = userDate.substring(5,10);
+    console.log(`Start day: ${shortDate}`);
+    const sdPlusOne = month + "-" + datePlusOne;
+    console.log(`End day: ${sdPlusOne}`)
+    const weatherbitURL = `https://api.weatherbit.io/v2.0/normals?lat=${latLong.lat}&lon=${latLong.long}&start_day=${shortDate}&end_day=${sdPlusOne}&tz=local&key=${apiKeys.weatherbit}`;
+    console.log(weatherbitURL);
+    let weatherResp = await fetch(weatherbitURL);
+    let weathDataTemp = await weatherResp.json();
+    weatherData.Tempf = cToF(weathDataTemp.data[0].temp);
+    weatherData.min_temp = weathDataTemp.data[0].min_temp;
+    weatherData.max_temp = weathDataTemp.data[0].min_temp;
 }
 
 // Get image from pixabay_key
