@@ -76,13 +76,15 @@ app.post('/getGeoName', async function (req, res) {
 });
 // Get weather data function
 var getWeatherData = async function () {
-    let weatherbitURL = `http://api.weatherbit.io/v2.0/current?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
+    let weatherbitURL = `http://api.weatherbit.io/v2.0/forecast/daily?&lat=${latLong.lat}&lon=${latLong.long}&key=${apiKeys.weatherbit}`;
     let weatherDataLoc = {}
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    weatherData.tempC = weathDataTemp.data[0].temp;
     weatherData.tempF = cToF(weathDataTemp.data[0].temp);
-    weatherData.feelsLike = cToF(weathDataTemp.data[0].app_temp);
+    weatherData.high = cToF(weathDataTemp.data[0].max_temp)
+    weatherData.low = cToF(weathDataTemp.data[0].min_temp)
+    weatherData.feelsLike = (cToF(weathDataTemp.data[0].app_max_temp) + cToF(weathDataTemp.data[0].app_min_temp)) / 2;
+    weatherData.icon = `https://www.weatherbit.io/static/img/icons/${weathDataTemp.data[0].weather.icon}.png`;
     weatherData.desc = weathDataTemp.data[0].weather.description;
 };
 
@@ -100,8 +102,9 @@ var getHistWeatherData = async function (userDate) {
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
     weatherData.Tempf = cToF(weathDataTemp.data[0].temp);
-    weatherData.min_temp = weathDataTemp.data[0].min_temp;
-    weatherData.max_temp = weathDataTemp.data[0].min_temp;
+    weatherData.min_temp = cToF(weathDataTemp.data[0].min_temp);
+    weatherData.max_temp = cToF(weathDataTemp.data[0].min_temp);
+    weatherData.precip = weathDataTemp.data[0].precip;
 }
 
 // Get image from pixabay_key
