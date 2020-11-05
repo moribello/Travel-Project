@@ -33,7 +33,7 @@ fetch('http://localhost:8084/getGeoName', {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({text: userLoc, days: countdown})
+        body: JSON.stringify({text: userLoc, days: countdown, userDate: userDate})
     })
     .then(res => res.json())
     // .then(function(res) {
