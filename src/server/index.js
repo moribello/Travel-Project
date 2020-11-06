@@ -68,8 +68,8 @@ app.post('/getGeoName', async function (req, res) {
         await getHistWeatherData(userDate);
     }
     console.log(weatherData);
-    //run function to get pixabay data
-    // getPixabay(userLoc);
+
+    await getPixabay(userLoc);
     // res.send(weatherData);
 
 
@@ -90,8 +90,9 @@ var getWeatherData = async function () {
 
 var getHistWeatherData = async function (userDate) {
     let histWeatherLoc = {}; //local javascript object to hold data
-    const month = userDate.substring(6,7);//month is kept as a string because we don't need to do anything to it
-    const date = parseInt(userDate.substring(9,10));//get int value for day of month
+    const month = userDate.substring(5,7);//month is kept as a string because we don't need to do anything to it
+    const date = parseInt(userDate.substring(8,10));//get int value for day of month
+    console.log(`Day: ${date}`);
     const datePlusOne = date + 1; //add one to the user date to get the end point
     const shortDate = userDate.substring(5,10);
     console.log(`Start day: ${shortDate}`);
@@ -110,7 +111,7 @@ var getHistWeatherData = async function (userDate) {
 // Get image from pixabay_key
 var getPixabay = async function (travLocation) {
     let pixabayURL = `https://pixabay.com/api/?key=${apiKeys.pixabay}&q=${travLocation}&image_type=photo`
-    console.log(pixabayURL);
+    // console.log(pixabayURL);
     let pixabayResp = await fetch(pixabayURL);
     let pixabayTemp = await pixabayResp.json();
     weatherData.photo = pixabayTemp.hits[0].webformatURL;
