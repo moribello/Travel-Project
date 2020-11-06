@@ -67,9 +67,11 @@ app.post('/getGeoName', async function (req, res) {
         console.log(`Searching for historical weather data for ${userDate}`);
         await getHistWeatherData(userDate);
     }
-    console.log(weatherData);
 
     await getPixabay(userLoc);
+
+    console.log(weatherData);
+
     // res.send(weatherData);
 
 
@@ -92,14 +94,10 @@ var getHistWeatherData = async function (userDate) {
     let histWeatherLoc = {}; //local javascript object to hold data
     const month = userDate.substring(5,7);//month is kept as a string because we don't need to do anything to it
     const date = parseInt(userDate.substring(8,10));//get int value for day of month
-    console.log(`Day: ${date}`);
     const datePlusOne = date + 1; //add one to the user date to get the end point
     const shortDate = userDate.substring(5,10);
-    console.log(`Start day: ${shortDate}`);
     const sdPlusOne = month + "-" + datePlusOne;
-    console.log(`End day: ${sdPlusOne}`)
     const weatherbitURL = `https://api.weatherbit.io/v2.0/normals?lat=${latLong.lat}&lon=${latLong.long}&start_day=${shortDate}&end_day=${sdPlusOne}&tz=local&key=${apiKeys.weatherbit}`;
-    console.log(weatherbitURL);
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
     weatherData.Tempf = cToF(weathDataTemp.data[0].temp);
