@@ -36,16 +36,34 @@ fetch('http://localhost:8084/getGeoName', {
         body: JSON.stringify({text: userLoc, days: countdown, userDate: userDate})
     })
     .then(res => res.json())
-    // .then(function(res) {
-    //     console.log(res);
-    //     };
-//         document.getElementById('agree').innerHTML = agrees;
-//         document.getElementById('conf').innerHTML = res.confidence;
-//         document.getElementById('irony').innerHTML = res.irony;
-            document.getElementById('dispLoc').innerHTML = `<h1>${userLoc}</h1>`;
-            document.getElementById('dispCountdown').innerHTML = `<h1>You are leaving in ${countdown} days</h1>`;
-            document.getElementById('dispDate').innerHTML = `<h1>${friendlyDate(userDate)}</h1>`;
+    .then(function(res) {
+        // console.log(res);
+    document.getElementById('dispLoc').innerHTML = `<h1>${userLoc}</h1>`;
+    document.getElementById('dispCountdown').innerHTML = `<h1>You are leaving in ${countdown} days</h1>`;
+    document.getElementById('dispDate').innerHTML = `<h1>${friendlyDate(userDate)}</h1>`;
 
+    if (countdown <= 14) {
+        console.log(`Predicted Weather: Temp: ${res.tempF}, high: ${res.high}, icon: ${res.icon}, photo: ${res.photo}`);
+        document.getElementById('weatherHeader').innerHTML = "<h1>Predicted Weather:</h1>";
+        document.getElementById('dispWeath').innerHTML = `<div class="weatherIcon"><img src=${res.icon} alt="Weather Icon"></div>
+        <br>
+        <div class="weatherData">
+        <em>Temperature: </em>${res.tempF}<br>
+        <em>Feels like: </em>${res.feelsLike}<br>
+        <em>Weather: </em>${res.desc}<br>
+        <em>High: </em>${res.high}<br>
+        <em>Low: </em>${res.low}
+        </div>
+        `;
+        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
+        // set up string for projected weather
+        // fields: .tempF, .high, .low, .feelslike, .icon, .desc, .photo
+    } else {
+        console.log(`Predicted Weather: Temp: ${res.tempF}, high: ${res.max_temp}, low: ${res.min_temp}, photo: ${res.photo}`);
+        //set up string for historical weather.
+        //fields: .tempF, .min_temp, .max_temp, .precip, .photo
+    }
+});
 //     })
 //}//bracket to close if / else statement
 }//bracket to close function

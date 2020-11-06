@@ -22,6 +22,11 @@ $body-text: 'Advent Pro', sans-serif;
     width: 45%;
 }
 
+%resultsDisp {
+    background-color: $lightestBlue;
+    padding: 5px 10px;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -117,10 +122,25 @@ h1{
 }
 
 .displayBox {
+    @extend %resultsDisp;
     display: flex;
     flex-direction: row;
+}
+
+.weatherDisplayBox {
+    @extend %resultsDisp;
     background-color: $lightestBlue;
-    padding: 5px 10px;
+    display: row;
+}
+.weatherIcon{
+    float: right;
+    height: 50px;
+    margin-right:30px;
+}
+
+.weatherData {
+    margin: 10px 0px 10px 20px;
+    line-height: 150%;
 }
 
 .textLabel{

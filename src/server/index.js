@@ -72,7 +72,7 @@ app.post('/getGeoName', async function (req, res) {
 
     console.log(weatherData);
 
-    // res.send(weatherData);
+    res.send(weatherData);
 
 
 });
@@ -100,7 +100,7 @@ var getHistWeatherData = async function (userDate) {
     const weatherbitURL = `https://api.weatherbit.io/v2.0/normals?lat=${latLong.lat}&lon=${latLong.long}&start_day=${shortDate}&end_day=${sdPlusOne}&tz=local&key=${apiKeys.weatherbit}`;
     let weatherResp = await fetch(weatherbitURL);
     let weathDataTemp = await weatherResp.json();
-    weatherData.Tempf = cToF(weathDataTemp.data[0].temp);
+    weatherData.tempF = cToF(weathDataTemp.data[0].temp);
     weatherData.min_temp = cToF(weathDataTemp.data[0].min_temp);
     weatherData.max_temp = cToF(weathDataTemp.data[0].min_temp);
     weatherData.precip = weathDataTemp.data[0].precip;
