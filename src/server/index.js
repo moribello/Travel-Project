@@ -38,7 +38,7 @@ app.listen(8084, function () {
 
 //function to convert from Celcius to Farenheit
 function cToF(tempC) {
-    let tempF = +((tempC * (9/5)) + 32).toFixed(2);
+    let tempF = +((tempC * (9/5)) + 32).toFixed(0);
     return tempF;
 }
 

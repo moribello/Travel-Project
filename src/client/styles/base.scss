@@ -1,7 +1,9 @@
 //import Google fonts
-@import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Advent+Pro:wght@600&display=swap');
 
 @import url('https://fonts.googleapis.com/css?family=Krona+One');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 //color variables
 $mainBlue: #748CAB;	// Main Primary color */
@@ -12,8 +14,9 @@ $titleBlue: #2D4C73;
 $light-gray: #DDDDDD;
 
 //font variables
-$title-text: 'Krono One', sans-serif;
-$body-text: 'Advent Pro', sans-serif;
+$title-text: 'Krona One', sans-serif;
+$body-text: 'Roboto', sans-serif;
+
 
 %dispBox {
     background-color: $blueGray;

@@ -43,25 +43,31 @@ fetch('http://localhost:8084/getGeoName', {
     document.getElementById('dispDate').innerHTML = `<h1>${friendlyDate(userDate)}</h1>`;
 
     if (countdown <= 14) {
-        console.log(`Predicted Weather: Temp: ${res.tempF}, high: ${res.high}, icon: ${res.icon}, photo: ${res.photo}`);
         document.getElementById('weatherHeader').innerHTML = "<h1>Predicted Weather:</h1>";
         document.getElementById('dispWeath').innerHTML = `<div class="weatherIcon"><img src=${res.icon} alt="Weather Icon"></div>
         <br>
         <div class="weatherData">
-        <em>Temperature: </em>${res.tempF}<br>
-        <em>Feels like: </em>${res.feelsLike}<br>
+        <em>Temperature: </em>${res.tempF}&deg; F<br>
+        <em>Feels like: </em>${res.feelsLike}&deg; F<br>
         <em>Weather: </em>${res.desc}<br>
-        <em>High: </em>${res.high}<br>
-        <em>Low: </em>${res.low}
+        <em>High: </em>${res.high}&deg; F<br>
+        <em>Low: </em>${res.low}&deg; F
         </div>
         `;
         document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
         // set up string for projected weather
         // fields: .tempF, .high, .low, .feelslike, .icon, .desc, .photo
     } else {
-        console.log(`Predicted Weather: Temp: ${res.tempF}, high: ${res.max_temp}, low: ${res.min_temp}, photo: ${res.photo}`);
-        //set up string for historical weather.
-        //fields: .tempF, .min_temp, .max_temp, .precip, .photo
+        document.getElementById('weatherHeader').innerHTML = "<h1>Historic Weather Data:</h1>";
+        document.getElementById('dispWeath').innerHTML =
+        `<div class="weatherData">
+        <em>Temperature: </em>${res.tempF}&deg; F<br>
+        <em>High: </em>${res.max_temp}&deg; F<br>
+        <em>Low: </em>${res.min_temp}&deg; F<br>
+        <em>Average precipitation: </em>${res.precip} inches
+        </div>
+        `;
+        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
     }
 });
 //     })
