@@ -1,9 +1,13 @@
-function validateText(inputText) {
+function validateLoc(inputText) {
+    //create object for values
+    let validateValues = {}
     //checks for empty string
     if (inputText==""){
-        return false;
+        validateValues.location = false
     } else {
-        return true;
+        validateValues.location = true
     }
+    console.log(validateValues.location);
+    return validateValues;
 }
-export { validateText }
+export { validateLoc }

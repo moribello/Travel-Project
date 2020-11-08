@@ -70,8 +70,6 @@ app.post('/getGeoName', async function (req, res) {
 
     await getPixabay(userLoc);
 
-    console.log(weatherData);
-
     res.send(weatherData);
 
 
