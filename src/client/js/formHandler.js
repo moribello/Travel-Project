@@ -2,9 +2,9 @@ function handleSubmit(event) {
     event.preventDefault()
 
     // retrieve text entered into the form field
-    console.log("Retrieving user data...");
     let userLoc = document.getElementById('userLocText').value;
     let userDate = new Date(document.getElementById('userDateText').value);
+    console.log(`User Date: ${userDate}`);
     let todayDate = new Date();
     let shortDate = friendlyDate(userDate);
 
@@ -20,11 +20,14 @@ function handleSubmit(event) {
 
 
     //validate input text
-    console.log("Checking user input...")
-    validation = Client.validateLoc(userLoc)
+    if (document.getElementById('userLocText').value !== ""){
+        let validation = Client.validateLoc(userLoc, userDate)
+    } else {
+        alert("Please enter an arrival date in the field provided")
+    }
 
     // Checks for returned value
-    if (validation.location !== true) {
+    if (Client.validateLoc(userLoc, userDate).location !== true) {
         alert("Please enter a city in the \'destination city\' field")
     } else {
         //

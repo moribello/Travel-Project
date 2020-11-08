@@ -1,13 +1,15 @@
-function validateLoc(inputText) {
+function validateLoc(location, userDate) {
+    console.log(`Received ${userDate}`)
     //create object for values
     let validateValues = {}
-    //checks for empty string
-    if (inputText==""){
+    //checks for empty string in location
+    if (location == ""){
         validateValues.location = false
     } else {
         validateValues.location = true
-    }
-    console.log(validateValues.location);
+    };
+
     return validateValues;
 }
+
 export { validateLoc }
