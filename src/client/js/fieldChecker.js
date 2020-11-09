@@ -1,4 +1,4 @@
-function validateLoc(userDate) {
+function validateDate(userDate) {
     console.log(`Received ${userDate}`)
     const today = new Date();
     today.setHours(0,0,0,0); //sets hours for "today" to be 0s so only the date is compared.
@@ -8,7 +8,6 @@ function validateLoc(userDate) {
         return true;
     };
 
-    return validateValues;
 }
 
-export { validateLoc }
+export { validateDate }

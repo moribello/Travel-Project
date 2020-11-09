@@ -24,7 +24,7 @@ function handleSubmit(event) {
         alert("Please enter an arrival date in the field provided")
     } else {
         // Checks for returned value
-        if (Client.validateLoc(userDate) !== true) {
+        if (Client.validateDate(userDate) !== true) {
                 alert("You have entered a date that's before today. Please enter a date from today forward.")
         } else {
         //
