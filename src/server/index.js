@@ -51,14 +51,15 @@ app.post('/getGeoName', async function (req, res) {
     apiKeys.pixabay = process.env.pixabay_key; //get Pixabay key
 
     let geonamesURL =
-    `http://api.geonames.org/geocodeJSON?q=${userLoc}&username=${apiKeys.geoname}` //create full URL for geonames query
+    `http://api.geonames.org/searchJSON?q=${userLoc}&maxRows=1&username=${apiKeys.geoname}` //create full URL for geonames query
+    console.log(geonamesURL);
     let response = await fetch(geonamesURL);
     let data = await response.json();
-    latLong.lat = data.geoCoderResult.lat;
-    latLong.long = data.geoCoderResult.lng;
-    weatherData.city = data.geoCoderResult.city;
-    weatherData.state = data.geoCoderResult.adminName1;
-    weatherData.countryCode = data.geoCoderResult.countryCode;
+    latLong.lat = data.geonames[0].lat;
+    latLong.long = data.geonames[0].lng;
+    weatherData.city = data.geonames[0].name;
+    weatherData.state = data.geonames[0].adminName1;
+    weatherData.countryCode = data.geonames[0].countryCode;
 
     //run function to get weather data based on lat and long
     if (countdown <= 14){
