@@ -83,16 +83,6 @@ h1{
     margin: 5px auto;
 }
 
-#userLoc {
-    @extend %dispBox;
-    display: flex;
-    flex-direction: column;
-}
-#userDate {
-    @extend %dispBox;
-    display: flex;
-    flex-direction: column;
-}
 #submitButton {
     width: 50%;
     margin-left: auto;
@@ -118,6 +108,11 @@ h1{
     h1 {
         font-size: 1.5em;
     }
+}
+.userInputField {
+    @extend %dispBox;
+    display: flex;
+    flex-direction: column;
 }
 
 .userTextBox {
