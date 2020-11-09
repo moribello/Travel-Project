@@ -51,7 +51,7 @@ app.post('/getGeoName', async function (req, res) {
     apiKeys.pixabay = process.env.pixabay_key; //get Pixabay key
 
     let geonamesURL =
-    `http://api.geonames.org/searchJSON?q=${userLoc}&maxRows=1&username=${apiKeys.geoname}` //create full URL for geonames query
+    `http://api.geonames.org/searchJSON?name=${userLoc}&maxRows=1&isNameRequired=true&username=${apiKeys.geoname}` //create full URL for geonames query
     console.log(geonamesURL);
     let response = await fetch(geonamesURL);
     let data = await response.json();

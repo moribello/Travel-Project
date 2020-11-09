@@ -4,7 +4,6 @@ function handleSubmit(event) {
     // retrieve text entered into the form field
     let userLoc = document.getElementById('userLocText').value;
     let userDate = new Date(document.getElementById('userDateText').value);
-    console.log(`User Date: ${userDate}`);
     let todayDate = new Date();
     let shortDate = friendlyDate(userDate);
     let countdown = (Math.round((userDate - todayDate) / (1000 * 60 * 60 * 24))) + 1;
