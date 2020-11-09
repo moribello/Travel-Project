@@ -25,17 +25,17 @@ Description:
 ------------
 Like the Natural Language Processing project, this project had several
 requirements, all to be performed using JavaScript:
-    - Retrieve a destination city and anticipated arrival date from the user
-    - Send that information local node server
-    - Have the local node server retrieve several stored API keys so they're not
-     exposed on the user side
-    - Use the user's destination city and the stored GeoNames API key to obtain
-    latitude and longitude information for the requested city
-    - Use that latitude and longitude information in addition to a second stored
-     API key to request weather data from weatherbit.io
-        - If the anticipated arrival date is 14 days or less than today,
-        request a predicted forecast
-        - If the anticipated arrival date is more than 14 days from today,
+- Retrieve a destination city and anticipated arrival date from the user
+- Send that information local node server
+- Have the local node server retrieve several stored API keys so they're not
+  exposed on the user side
+- Use the user's destination city and the stored GeoNames API key to obtain
+  latitude and longitude information for the requested city
+- Use that latitude and longitude information in addition to a second stored
+  API key to request weather data from weatherbit.io
+    - If the anticipated arrival date is 14 days or less than today,
+    request a predicted forecast
+    - If the anticipated arrival date is more than 14 days from today,
         provide historical weather data for that particular day of the year.
 
 In addition, the user fields are validated to ensure that no blank fields are
