@@ -18,38 +18,38 @@ function handleSubmit(event) {
     }
 
     //validate input text
-    if (document.getElementById('userLocText').value == ""){
+    if (document.getElementById('userLocText').value == "") {
         alert("Please enter a destination city")
     } else if (document.getElementById('userDateText').value == "") {
         alert("Please enter an arrival date in the field provided")
     } else {
         // Checks for returned value
         if (Client.validateDate(userDate) !== true) {
-                alert("You have entered a date that's before today. Please enter a date from today forward.")
+            alert("You have entered a date that's before today. Please enter a date from today forward.")
         } else {
-        //
-        // Send user location to server
-        fetch('http://localhost:8084/getGeoName', {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text: userLoc,
-                    days: countdown,
-                    userDate: userDate
+            //
+            // Send user location to server
+            fetch('http://localhost:8084/getGeoName', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: userLoc,
+                        days: countdown,
+                        userDate: userDate
+                    })
                 })
-            })
-            .then(res => res.json())
-            .then(function(res) {
-                document.getElementById('dispLoc').innerHTML = `<h1>${userLoc}</h1>`;
-                document.getElementById('dispCountdown').innerHTML = `<h1>You are leaving in ${countdown} days</h1>`;
-                document.getElementById('dispDate').innerHTML = `<h1>${friendlyDate(userDate)}</h1>`;
+                .then(res => res.json())
+                .then(function(res) {
+                    document.getElementById('dispLoc').innerHTML = `<h1>${res.city}, ${res.state} \(${res.countryCode}\)</h1>`;
+                    document.getElementById('dispCountdown').innerHTML = `<h1>You are leaving in ${countdown} days</h1>`;
+                    document.getElementById('dispDate').innerHTML = `<h1>${friendlyDate(userDate)}</h1>`;
 
-                if (countdown <= 14) {
-                    document.getElementById('weatherHeader').innerHTML = "<h1>Predicted Weather:</h1>";
-                    document.getElementById('dispWeath').innerHTML = `<div class="weatherIcon"><img src=${res.icon} alt="Weather Icon"></div>
+                    if (countdown <= 14) {
+                        document.getElementById('weatherHeader').innerHTML = "<h1>Predicted Weather:</h1>";
+                        document.getElementById('dispWeath').innerHTML = `<div class="weatherIcon"><img src=${res.icon} alt="Weather Icon"></div>
                     <br>
                     <div class="weatherData">
                     <em>Temperature: </em>${res.tempF}&deg; F<br>
@@ -59,24 +59,24 @@ function handleSubmit(event) {
                     <em>Low: </em>${res.low}&deg; F
                     </div>
                     `;
-        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
-                } else {
-                    document.getElementById('weatherHeader').innerHTML = "<h1>Historic Weather Data:</h1>";
-                    document.getElementById('dispWeath').innerHTML =
-                        `<div class="weatherData">
+                        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
+                    } else {
+                        document.getElementById('weatherHeader').innerHTML = "<h1>Historic Weather Data:</h1>";
+                        document.getElementById('dispWeath').innerHTML =
+                            `<div class="weatherData">
         <em>Temperature: </em>${res.tempF}&deg; F<br>
         <em>High: </em>${res.max_temp}&deg; F<br>
         <em>Low: </em>${res.min_temp}&deg; F<br>
         <em>Average precipitation: </em>${res.precip} inches
         </div>
         `;
-        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
-                }
-            });
-        //     })
-        }//bracket to close if / else statement
+                        document.getElementById('photo').innerHTML = `<img src=${res.photo}>`;
+                    }
+                });
+            //     })
+        } //bracket to close if / else statement
     } //bracket to close function
 }
 export {
-        handleSubmit
-    }
+    handleSubmit
+}

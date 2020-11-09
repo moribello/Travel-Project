@@ -2,14 +2,14 @@
 const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const http = require("https");
-const getCountryName = require('./countryCodes.js');
+
 
 dotenv.config();
 
-// import { isoCountries } from './countryCodes.js';
+
 
 // Setup empty JS object to act as endpoint for all routes
-// let projectData = {};
+
 let latLong = {}; //JS object for lat / long data
 var weatherData = {} //JS object for weather data
 let apiKeys = {}; //Empty JS object to hold all of the API keys
@@ -56,8 +56,9 @@ app.post('/getGeoName', async function (req, res) {
     let data = await response.json();
     latLong.lat = data.geoCoderResult.lat;
     latLong.long = data.geoCoderResult.lng;
-    latLong.countryCode = data.geoCoderResult.countryCode;
-    latLong.state = data.geoCoderResult.adminName1;
+    weatherData.city = data.geoCoderResult.city;
+    weatherData.state = data.geoCoderResult.adminName1;
+    weatherData.countryCode = data.geoCoderResult.countryCode;
 
     //run function to get weather data based on lat and long
     if (countdown <= 14){
