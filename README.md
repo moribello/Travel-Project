@@ -102,14 +102,14 @@ Future Additions
 ----------------
 While generally good at finding appropriate images and correct geographical
 locations, some fine tuning could be performed:
-    - Additional fields for State and Country could be added to help refine the
-    GeoNames search.
-    - Rather than displaying a single image from Pixabay a collection of images
-    might be made available based on availability
-    - Recommendations for clothing might be made based on projected or
+- Additional fields for State and Country could be added to help refine the
+  GeoNames search.
+- Rather than displaying a single image from Pixabay a collection of images
+  might be made available based on availability
+- Recommendations for clothing might be made based on projected or
     historical weather data; for instance, if historical precipitation is
     greater than 1" a recommendation to pack an umbrella might be made, or a
     heavy jacket for predicted / historical weather less than 50 degrees F.
-    - The developer is admittedly American-centric as far as measurements go;
+- The developer is admittedly American-centric as far as measurements go;
     the ability to switch between F and C at the user's request would make the
     page more universally friendly and helpful.
