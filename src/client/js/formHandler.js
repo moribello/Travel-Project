@@ -7,8 +7,7 @@ function handleSubmit(event) {
     console.log(`User Date: ${userDate}`);
     let todayDate = new Date();
     let shortDate = friendlyDate(userDate);
-
-    let countdown = Math.round((userDate - todayDate) / (1000 * 60 * 60 * 24));
+    let countdown = (Math.round((userDate - todayDate) / (1000 * 60 * 60 * 24))) + 1;
 
     function friendlyDate(dateObj) {
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
@@ -18,18 +17,16 @@ function handleSubmit(event) {
         return newdate;
     }
 
-
     //validate input text
-    if (document.getElementById('userLocText').value !== ""){
-        let validation = Client.validateLoc(userLoc, userDate)
-    } else {
+    if (document.getElementById('userLocText').value == ""){
+        alert("Please enter a destination city")
+    } else if (document.getElementById('userDateText').value == "") {
         alert("Please enter an arrival date in the field provided")
-    }
-
-    // Checks for returned value
-    if (Client.validateLoc(userLoc, userDate).location !== true) {
-        alert("Please enter a city in the \'destination city\' field")
     } else {
+        // Checks for returned value
+        if (Client.validateLoc(userDate) !== true) {
+                alert("You have entered a date that's before today. Please enter a date from today forward.")
+        } else {
         //
         // Send user location to server
         fetch('http://localhost:8084/getGeoName', {
@@ -79,7 +76,7 @@ function handleSubmit(event) {
         //     })
         }//bracket to close if / else statement
     } //bracket to close function
-
+}
 export {
         handleSubmit
     }
